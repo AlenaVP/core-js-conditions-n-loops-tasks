@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return !(number < 0);
 }
 
 /**
@@ -38,8 +38,14 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let result;
+  if (a > b) {
+    result = a > c ? a : c;
+  } else {
+    result = b > c ? b : c;
+  }
+  return result;
 }
 
 /**
@@ -60,8 +66,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  return (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  );
 }
 
 /**
@@ -82,8 +92,13 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (!(a > 0 && b > 0 && c > 0)) {
+    return false;
+  }
+  return (
+    (a === b && a + b > c) || (b === c && c + b > a) || (c === a && a + c > b)
+  );
 }
 
 /**
@@ -100,8 +115,32 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romans = [
+    'M',
+    'CM',
+    'D',
+    'CD',
+    'C',
+    'XC',
+    'L',
+    'XL',
+    'X',
+    'IX',
+    'V',
+    'IV',
+    'I',
+  ];
+  const divisors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  let mod = num;
+  let roman = '';
+  for (let i = 0; i < divisors.length; i += 1) {
+    while (mod >= divisors[i]) {
+      roman += romans[i];
+      mod -= divisors[i];
+    }
+  }
+  return roman;
 }
 
 /**
